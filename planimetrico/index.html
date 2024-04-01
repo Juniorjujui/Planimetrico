@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estação KM</title>
+    <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+    <h1>Digite o nome da estação ou ramal:</h1>
+    <input type="text" id="stationInput" placeholder="Digite o nome da estação">
+    <button id="submitBtn">Submit</button>
+    <p id="result"></p>
+    <style>
+        body {
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            border-radius: 8px;
+            justify-content: center;
+            display: flex;
+            text-align: center;
+            margin-bottom: 30px;
+    
+        }
+        input[type="text"] {
+            width: 90%;
+            height: 40px;
+            margin-top: 20px;
+            background-color: #f7f7f7;
+            border: none;
+            outline: none;
+            box-shadow: 0px  6px 12px rgba(0,0,0,.1);
+            border-radius: 8px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 32px;
+            border-radius: 50%;
+            width: max-content;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            top: 50%;
+
+        }
+        .light #switch button {
+            animation: slind-en 0.4s forwards;
+          }
+        
+        button:hover {
+
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+    
+    <script>
+        const estacoes = {
+            "MADUREIRA": "08+253",
+            "DEL CASTILHO": "10+028",
+            "PILARES": "12+341",
+            "TOMAZ COELHO": "14+421",
+            "CAVACANTE": "15+717",
+            "MERCADAO DE MADUREIRA": "18+154",
+            "ROCHA MIRANDA": "20+633",
+            "HONORIO GURGEL": "21+394",
+            "BARROS FILHO": "23+636",
+            "COSTA BARROS": "25+126",
+            "PAVUNA": "27+068",
+            "VILA ROSALINA": "28+634",
+            "AGOSTINHO PORTO": "29+779",
+            "GRAMACHO": "30+311",
+            "BELFORD ROXO": "31+633",
+            "DEODORO" : "21+874",
+            "MARECHAL HERMES": "20+489",
+            "BENTO RIBEIRO":"19+300",
+            "OSWALDO DO CRUZ": "18+050",
+            "MADUREIRA":"16+418",
+            "CASCADURA": "15+287",
+            "QUINTINO": "14+332",
+            "PIEDADE": "13+049",
+            "ENGENHO DE DENTRO": "11+245",
+            "MEIER": "09+455",
+            "ENGENHO NOVO": "08+604",
+            "SAMPAIO": "07+747",
+            "RIACHUELO": "06+962",
+            "SÃO FRANCISCO XAVIER": "05+759",
+            "MARACANÃ": "04+470",
+            "SÃO CRITOVÃO": "03+379",
+            "PRAÇA DA BANDEIRA": "02+302",
+            "CENTRAL": "00+000",
+            "VILA MILITAR" : "24+129",
+            "MAGALHÃES BASTOS": "25+427",
+            "REALENGO": "27+325",
+            "PADRE MIGUEL": "29+168",
+            "BANGÚ": "31+091",
+            "SENADOR_CAMARA": "33+143",
+            "SANTÍSSIMO": "35+859",
+            "AUGUSTO_VASCONCELOS": "38+954",
+            "CAMPO GRANDE": "41+628",
+            "BAIJAMIM DO MONTE": "43+840",
+            "INHOAÍBA": "45+250",
+            "COSMO": "47+316",
+            "PACIÊNCIA": "49+214",
+            "TANCREDO NEVES": "50+959",
+            "SANTA CRUZ": "54+637",
+            "RICARDO DE ALBUQUERQUE": "24+304",
+            "ANCHIETA": "26+478",
+            "OLINDA": "27+524",
+            "NILÓPOLIS": "28+598",
+            "EDSON PASSOS": "30+192",
+            "MESQUITA": "31+8209",
+            "PRESIDENTE JUSCELINO": "33+356",
+            "NOVA IGUAÇU": "35+231",
+            "COMENDADOR SOARES": "39+741",
+            "AUSTIN": "44+460",
+            "QUEIMADOS": "48+264",
+            "ENGENHEIRO PEDREIRA": "54+684",
+            "JEPERI": "61+278",
+            "DR.EIRAS": "66+461",
+            "LAGES": "67+882",
+            "PARACAMBI": "69+728",
+            "MANGUINHO": "6+612",
+            "BONSUCESSO": "07+8",
+            "RAMOS": "09+304",
+            "Olario": "10+368",
+            "PENHA": "11+946",
+            "CORDOVIL": "16+996",
+            "DUQ DE CAXIAS": "19+156",
+            "CORTE": "20+913",
+            "GRAMACHO": "23+311",
+        };
+           
+
+
+        const submitBtn = document.getElementById("submitBtn");
+        const stationInput = document.getElementById("stationInput");
+        const result = document.getElementById("result");
+
+        submitBtn.addEventListener("click", () => {
+            const station = stationInput.value.trim().toUpperCase();
+
+            if (estacoes[station]!== undefined) {
+                result.textContent = `O km é: ${(estacoes[station])}`;
+            } else {
+                result.textContent = "Estação não encontrada";
+            }
+        });
+    </script>
+</body>
+</html>
