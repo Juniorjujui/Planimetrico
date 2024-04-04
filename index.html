@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estação KM</title>
     <link rel="stylesheet" href="estilo.css" />
-    
 </head>
 <body >
   
     <div><img src="img/download.png" alt="" class="logo"></div>  
-    <h1>Digite o nome da estação ou ramal:</h1>
+    <h1>Digite a estação ou km:</h1>
     <input type="text" id="stationInput" placeholder="Digite o nome da estação">
     <button id="submitBtn">Enter</button>
     <p id="result"></p>
@@ -72,8 +71,113 @@
     </style>
     
     <script>
+        const kms = {
+            "21+874": "DEODORO",
+            "20+489": "MARECHAL HERMES",
+            "19+300": "BENTO RIBEIRO",
+            "18+050": "OSWALDO DO CRUZ",
+            "16+418": "MADUREIRA",
+            "15+287": "CASCADURA",
+            "14+332": "QUINTINO",
+            "13+049": "PIEDADE",
+            "11+245": "ENGENHO DE DENTRO",
+            "09+455": "MEIER",
+            "08+604": "ENGENHO NOVO",
+            "07+747": "SAMPAIO",
+            "06+962": "RIACHUELO",
+            "05+759": "SÃO FRANCISCO XAVIER",
+            "04+759": "MANGUEIRA",
+            "04+470": "MARACANÃ",
+            "03+379": "SÃO CRISTÓVÃO",
+            "02+302": "PRAÇA DA BANDEIRA",
+            "00+000": "CENTRAL",
+            "24+129": "VILA MILITAR",
+            "25+427": "MAGALHÃES BASTOS",
+            "27+325": "REALENGO",
+            "29+168": "PADRE MIGUEL",
+            "31+091": "BANGÚ",
+            "33+143": "SENADOR CAMARA",
+            "35+859": "SANTÍSSIMO",
+            "38+954": "AUGUSTO VASCONCELOS",
+            "41+628": "CAMPO GRANDE",
+            "43+840": "BAIJAMIM DO MONTE",
+            "45+250": "INHOAÍBA",
+            "47+316": "COSMO",
+            "49+214": "PACIÊNCIA",
+            "50+959": "TANCREDO NEVES",
+            "54+637": "SANTA CRUZ",
+            "24+304": "RICARDO DE ALBUQUERQUE",
+            "26+478": "ANCHIETA",
+            "27+524": "OLINDA",
+            "28+598": "NILÓPOLIS",
+            "30+192": "EDSON PASSOS",
+            "31+8209": "MESQUITA",
+            "33+356": "PRESIDENTE JUSCELINO",
+            "35+231": "NOVA IGUAÇÚ",
+            "39+741": "COMENDADOR SOARES",
+            "44+460": "AUSTIN",
+            "48+264": "QUEIMADOS",
+            "54+684": "ENGENHEIRO PEDREIRA",
+            "61+278": "JAPERI",
+            "66+461": "DR. EIRAS",
+            "67+882": "LAGES",
+            "69+728": "PARACAMBI",
+            "08+253": "JACAREZINHO",
+            "10+028": "DEL CASTILHO",
+            "12+341": "PILARES",
+            "14+421": "TOMAZ COELHO",
+            "15+717": "CAVACANTE",
+            "18+154": "MERCADÃO DE MADUREIRA",
+            "20+633": "ROCHA MIRANDA",
+            "21+394": "HONÓRIO GURGEL",
+            "23+636": "BARROS FILHO",
+            "25+126": "COSTA BARROS",
+            "27+068": "PAVUNA",
+            "28+634": "VILA ROSALINA",
+            "29+573": "AGOSTINHO PORTO",
+            "30+779": "COELHO DA ROCHA",
+            "23+311": "GRAMACHO",
+            "32+848": "BELFORD ROXO",
+            "06+612": "MANGUINHO",
+            "07+854": "BONSUCESSO",
+            "09+304": "RAMOS",
+            "10+368": "OLARIOS",
+            "11+946": "PENHA",
+            "16+996": "CORDOVIL",
+            "19+156": "DUQUE DE CAXIAS",
+            "20+913": "CORTE",
+            "29+379": "CAMPOS ELISEOS",
+            "31+902": "JARDIM PRIMAVERA",
+            "33+420": "SARACURA",
+            "34+500": "CABINE",
+            "37+177": "MORABI",
+            "39+279": "IMABARIÊ",
+            "40+889": "MONOEL BELO",
+            "42+154": "PARADA ANGÉLICA",
+            "44+935": "PIABETA",
+            "47+343": "FRANGOSO",
+            "49+245": "VILA HIOMIRIM",
+            "39+000": "PARQUE ESTRELA",
+            "42+092": "BONGABA",
+            "43+520": "PARADA MAUÁ",
+            "44+984": "PARADA DE SANTA DALILA",
+            "47+819": "SURUÍ",
+            "51+730": "SANTA GUILHERMINA",
+            "54+954": "PARADA BARÃO DE IRIRI",
+            "57+570": "MAGÉ",
+            "02+426": "JARDIM NOVA MARÍLIA",
+            "06+020": "NOVA MARINGA",
+            "06+067": "PARADA DO JORORÓ",
+            "07+733": "CITROLANDIA",
+            "09+572": "PARADA IDEAL",
+            "11+700": "PARADA FARIA",
+            "14+680": "PARADA MODELO",
+            "14+867": "PARADA BANANAL",
+            "16+726": "GUAPIMIRIM",
+           
+    
+        };
         const estacoes = {
-
             "DEODORO": "21+874",
             "MARECHAL HERMES": "20+489",
             "BENTO RIBEIRO": "19+300",
@@ -87,32 +191,32 @@
             "ENGENHO NOVO": "08+604",
             "SAMPAIO": "07+747",
             "RIACHUELO": "06+962",
-            "SÃO FRANCISCO XAVIER": "05+759",
+            "SANO FRANCISCO XAVIER": "05+759",
             "MANGUEIRA": "04+759",
-            "MARACANÃ": "04+470",
-            "SÃO CRISTÓVÃO": "03+379",
-            "PRAÇA DA BANDEIRA": "02+302",
+            "MARACANA": "04+470",
+            "SANO CRISTOVAN": "03+379",
+            "PRACA DA BANDEIRA": "02+302",
             "CENTRAL": "00+000",
             "VILA MILITAR": "24+129",
-            "MAGALHÃES BASTOS": "25+427",
+            "MAGALHAES BASTOS": "25+427",
             "REALENGO": "27+325",
             "PADRE MIGUEL": "29+168",
-            "BANGÚ": "31+091",
+            "BANGU": "31+091",
             "SENADOR CAMARA": "33+143",
-            "SANTÍSSIMO": "35+859",
+            "SANTISIMO": "35+859",
             "AUGUSTO VASCONCELOS": "38+954",
             "CAMPO GRANDE": "41+628",
             "BAIJAMIM DO MONTE": "43+840",
-            "INHOAÍBA": "45+250",
+            "INHOAIBA": "45+250",
             "COSMO": "47+316",
-            "PACIÊNCIA": "49+214",
+            "PACIENCIA": "49+214",
             "TANCREDO NEVES": "50+959",
             "SANTA CRUZ": "54+637",
             "RICARDO DE ALBUQUERQUE": "24+304",
             "ANCHIETA": "26+478",
             "OLINDA": "27+524",
-            "NILÓPOLIS": "28+598",
-            "EDSON PASSOS": "30+192",
+            "NILOPOLIS": "28+598",
+            "EDSOM PASSOS": "30+192",
             "MESQUITA": "31+8209",
             "PRESIDENTE JUSCELINO": "33+356",
             "NOVA IGUAÇÚ": "35+231",
@@ -121,7 +225,7 @@
             "QUEIMADOS": "48+264",
             "ENGENHEIRO PEDREIRA": "54+684",
             "JAPERI": "61+278",
-            "DR. EIRAS": "66+461",
+            "DR EIRAS": "66+461",
             "LAGES": "67+882",
             "PARACAMBI": "69+728",
             "JACAREZINHO": "08+253",
@@ -129,9 +233,9 @@
             "PILARES": "12+341",
             "TOMAZ COELHO": "14+421",
             "CAVACANTE": "15+717",
-            "MERCADÃO DE MADUREIRA": "18+154",
+            "MERCADAO DE MADUREIRA": "18+154",
             "ROCHA MIRANDA": "20+633",
-            "HONÓRIO GURGEL": "21+394",
+            "HONORIO GURGEL": "21+394",
             "BARROS FILHO": "23+636",
             "COSTA BARROS": "25+126",
             "PAVUNA": "27+068",
@@ -153,9 +257,9 @@
             "SARACURA": "33+420",
             "CABINE": "34+500",
             "MORABI": "37+177",
-            "IMABARIÊ": "39+279",
+            "IMBARIÊ": "39+279",
             "MONOEL BELO": "40+889",
-            "PARADA ANGÉLICA": "42+154",
+            "PARADA ANGELICA": "42+154",
             "PIABETA": "44+935",
             "FRANGOSO": "47+343",
             "VILA HIOMIRIM": "49+245",
@@ -175,9 +279,9 @@
             "PARADA FARIA": "11+700",
             "PARADA MODELO": "14+680",
             "PARADA BANANAL": "14+867",
-            "GUAPIMIRIM": "16+726",
-    };
-           
+            "GUAPIMIRIM": "16+726"          
+        };
+        
 
 
         const submitBtn = document.getElementById("submitBtn");
@@ -188,11 +292,15 @@
             const station = stationInput.value.trim().toUpperCase();
 
             if (estacoes[station]!== undefined) {
-                result.textContent = `O km desta estação é: ${(estacoes[station])}`;
-            } else {
-                result.textContent = "Estação não encontrada";
+                result.textContent = `A estação ou ramal referida está no km: ${(estacoes[station])}`;
+            }else if (kms[station]!== undefined){
+                result.textContent = `O km referido tem fica localizado no estação: ${(kms[station])} `;
+            }else{
+                result.textContent = "Informação não encontrada";
             }
+             
         });
+
     
         
     </script>
