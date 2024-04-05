@@ -15,6 +15,8 @@
     <p id="result"></p>
     <style>
         body {
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             font-family: Arial, sans-serif;
             max-width: 500px;
@@ -22,6 +24,7 @@
             padding: 20px;
         }
         h1 {
+            text-align: center;
             border-radius: 8px;
             justify-content: center;
             display: flex;
@@ -30,6 +33,7 @@
     
         }
         input[type="text"] {
+
             width: 90%;
             height: 40px;
             margin-top: 20px;
@@ -45,17 +49,24 @@
         
         
         button {
-            width: 32px;
-            border-radius: 50%;
-            width: max-content;
-            padding: 10px;
-            background-color: #4CAF50;
             color: white;
+            background-color: #7c4dff;
             border: none;
             cursor: pointer;
-            top: 50%;
+            transition: .3s ease all;
+            
+        }
+        button:hover {
+            background-color: #a15eff;
+        }
+        .img{
+            max-width: 100%;
+            height: auto;
 
         }
+           
+
+        
         .light #switch button {
             animation: slind-en 0.4s forwards;
           }
@@ -69,7 +80,7 @@
             font-weight: bold;
         }
     </style>
-    
+
     <script>
         const kms = {
             "21+874": "DEODORO",
@@ -219,7 +230,7 @@
             "EDSOM PASSOS": "30+192",
             "MESQUITA": "31+8209",
             "PRESIDENTE JUSCELINO": "33+356",
-            "NOVA IGUAÇÚ": "35+231",
+            "NOVA IGUAÇU": "35+231",
             "COMENDADOR SOARES": "39+741",
             "AUSTIN": "44+460",
             "QUEIMADOS": "48+264",
@@ -257,7 +268,7 @@
             "SARACURA": "33+420",
             "CABINE": "34+500",
             "MORABI": "37+177",
-            "IMBARIÊ": "39+279",
+            "IMBARIE": "39+279",
             "MONOEL BELO": "40+889",
             "PARADA ANGELICA": "42+154",
             "PIABETA": "44+935",
@@ -267,7 +278,7 @@
             "BONGABA": "42+092",
             "PARADA MAUÁ": "43+520",
             "PARADA DE SANTA DALILA": "44+984",
-            "SURUÍ": "47+819",
+            "SURUI": "47+819",
             "SANTA GUILHERMINA": "51+730",
             "PARADA BARÃO DE IRIRI": "54+954",
             "MAGÉ": "57+570",
