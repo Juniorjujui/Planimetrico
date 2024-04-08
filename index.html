@@ -5,14 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estação KM</title>
     <link rel="stylesheet" href="estilo.css" />
+
+    <div><img src="img/download.png" alt="" class="logo"></div>  
 </head>
 <body >
+    <form action="processa_form.php" method="post">
+        <fieldset>
+            <legend>Dados gerais</legend>
+
+            <label for="nome">Nome:</label>
+            <input type="text" minlength="3" id="nome" name="nome"required />
+            
+            <label for="cpf">CPF:</label>
+            <input type="text" maxlength="11" minlength="11" id="cpf" name="cpf" required />
+
+            <label for="tel">Tel. Celular</label>
+                <input type="tel" maxlength="13" id="tel" name="tel" placeholder="11-99999-9999" pattern="[0-9] {2}-[0-9]{5}-[0-9]{4}" required />
+        </fieldset>
+
+        <fieldset>
+            <legend>Endereço</legend>
+
+            <label for="tipo_endereço">Ramal</label>
+            <select name="tipo_endereço" id="tipo_endereço">
+                <option value="">Selecione</option>
+                <option value="DEODORO">Deodoro</option>
+                <option value="SANTA CRUZ">Santa cruz</option>
+                <option value="BELFORD ROXO">Belfor roxo</option>
+                <option value="JAPERI">Japeri</option>
+                <option value="SARACURUNA">Saracuruna</option>
+                <option value="MÉTRICA">Metríca</option>
+            </select>
+            <input type="text" id="stationInput" placeholder="Digite o nome da estação">
+            
+        
+           
+            <p id="result"></p>
+        </fieldset>
+
+        <fieldset>
+            <label for="tipo_numero" id="VPE">VPE</label>
+            <select name="tipo_numero" id="vpe">
+                <option value="">Selecione</option>
+                
+                
+
+        </fieldset>
+
+        <fieldset>
+            <button type="submit">Enviar sua Mensagem </button>
+        </fieldset>
+    </form>
+
+
+
   
-    <div><img src="img/download.png" alt="" class="logo"></div>  
-    <h1>Digite a estação ou km:</h1>
-    <input type="text" id="stationInput" placeholder="Digite o nome da estação">
-    <button id="submitBtn">Enter</button>
-    <p id="result"></p>
+   
+
+    
+   
     <style>
         body {
             justify-content: center;
@@ -34,7 +85,7 @@
         }
         input[type="text"] {
 
-            width: 90%;
+            width: 80%;
             height: 40px;
             margin-top: 20px;
             background-color: #b39f9f;
@@ -61,7 +112,10 @@
         }
         .img{
             max-width: 100%;
-            height: auto;
+            height: center;
+            object-fit: cover;
+            border-radius: 8px;
+
 
         }
            
@@ -265,7 +319,7 @@
             "CORTE": "20+913",
             "CAMPOS ELISEOS": "29+379",
             "JARDIM PRIMAVERA": "31+902",
-            "SARACURA": "33+420",
+            "SARACURANA": "33+420",
             "CABINE": "34+500",
             "MORABI": "37+177",
             "IMBARIE": "39+279",
@@ -276,7 +330,7 @@
             "VILA HIOMIRIM": "49+245",
             "PARQUE ESTRELA": "39+000",
             "BONGABA": "42+092",
-            "PARADA MAUÁ": "43+520",
+            "PARADA MAUA": "43+520",
             "PARADA DE SANTA DALILA": "44+984",
             "SURUI": "47+819",
             "SANTA GUILHERMINA": "51+730",
@@ -292,21 +346,201 @@
             "PARADA BANANAL": "14+867",
             "GUAPIMIRIM": "16+726"          
         };
-        
+        const vpe_codes = {
+            "VPE010S": "ALÍVIO DE TENSÃO EM TRILHO LONGO SOLDADO",
+            "VPE020S": "APLICAÇÃO DE DORMENTES 2,80M REEMPREGO",
+            "VPE030S": "APLICAÇÃO DE PARAFUSO DE TALA",
+            "VPE040S": "APLICAÇÃO DE PARAFUSO DE TALA REEMPREGO",
+            "VPE050S": "APLICAÇÃO DE TIREFONDS NOVOS",
+            "VPE060S": "APLICAÇÃO DE TIREFONDS REEMPREGO",
+            "VPE070S": "APLICAÇÃO MECANIZADA DE MONOBLOCO",
+            "VPE080S": "BIZELAMENTO DE JUNTAS ISOLANTES",
+            "VPE090S": "CARGA DE DORMENTES INSERVÍVEIS",
+            "VPE100S": "CARGA DE TRILHOS INSERVÍVEIS",
+            "VPE110S": "COLOCAÇÃO E RETIRADA DE PLACAS DE RESTR. VELOCIDADE",
+            "VPE120S": "COMPLEMENTAÇÃO DE FIXAÇÃO TIREFOND",
+            "VPE130S": "CONFECÇÃO DE PARA LASTRO",
+            "VPE140S": "CONSERVAÇÃO DE JUNTAS COMUNS COM DESMONTAGEM",
+            "VPE150S": "CONSERVAÇÃO DE JUNTAS COMUNS SEM DESMONTAGEM",
+            "VPE160S": "CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE CONCRETO BI-BLOCO",
+            "VPE170S": "CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE CONCRETO MONOBLOCO",
+            "VPE180S": "CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE MADEIRA",
+            "VPE190S": "CONSOLIDAÇÃO DO AMV: PARAFUSOS, FIXAÇÕES, ETC.",
+            "VPE200S": "CORREÇÃO DE BITOLA",
+            "VPE210S": "CORTE DE TRILHOS",
+            "VPE220S": "CORTE DIRETO DE DORMENTES DE MADEIRA",
+            "VPE230S": "DESCARGA DE DORMENTES INSERVÍVEIS",
+            "VPE240S": "DESCARGA DE LASTRO",
+            "VPE250S": "DESCOBRIMENTO E RECOBRIMENTO DE PASSAGEM EM NIVEL",
+            "VPE260S": "DESGUARNEC. MANUAL LASTRO, ATÉ 20CM  FACE INF. DORM. BL 1,00M",
+            "VPE270S": "DESGUARNEC. MANUAL LASTRO, ATÉ 20CM  FACE INF. DORM. BL 1,60M",
+            "VPE280S": "DESGUARNEC. MANUAL LASTRO, ATÉ 20CM  FACE INF. DORM. BL 1,60M MIX",
+            "VPE290S": "DESGUARNEC. MECANIZADO LASTRO, MAIOR 20CM  FACE INF. DORM. BL 1,60M",
+            "VPE300S": "DESMONTAGEM E MONTAGEM DE VIA COM CONTRA-TRILHO SOBRE PONTES",
+            "VPE310S": "ENTALHE DE DORMENTES DE MADEIRA",
+            "VPE320S": "ESQUADRO DE CHAVE",
+            "VPE330S": "FURAÇÃO DE TRILHOS",
+            "VPE340S": "IMPLANTAÇÃO DE JUNTA ISOLADA COLADA",
+            "VPE350S": "IMPLANTAÇÃO DE JUNTA ISOLADA ENCAPSULADA",
+            "VPE360S": "INSTALAÇÃO DE JUNTAS COMUNS",
+            "VPE370S": "LOCAÇÃO DE RETRO ESCAVADEIRA",
+            "VPE380S": "MANUTENÇÃO CORRETIVA DE JUNTAS TJ-57(LUBR.,LIMP.TALAS E TR, ETC)",
+            "VPE390S": "MANUTENÇÃO LINHAS OFICINAS",
+            "VPE400S": "NIVELAMENTO / SOCARIA MANUAL DE JUNTAS",
+            "VPE410S": "NIVELAMENTO, ALINHAMENTO E SOCARIA MANUAL  LINHA",
+            "VPE420S": "NIVELAMENTO, ALINHAMENTO E SOCARIA MANUAL  AMV",
+            "VPE430S": "QUADRAMENTO E REESPAÇAMENTO DORMENTES / VIGAS",
+            "VPE440S": "REAPERTO DE CRUZAMENTO C/ CONTRA TRILHO",
+            "VPE450S": "REGULAGEM GERAL DE CHAVE MANUAL",
+            "VPE460S": "REGULARIZAÇÃO MANUAL DE LASTRO",
+            "VPE470S": "REGULARIZAÇÃO MANUAL DO LASTRO DE AMV",
+            "VPE480S": "RESTAURAÇÃO DE PASSAGEM EM NIVEL",
+            "VPE490S": "RETENSIONAMENTO",
+            "VPE500S": "RETIRADA DE DORMENTES DE MADEIRA",
+            "VPE510S": "RONDA DE LINHA",
+            "VPE520S": "SUBST. DE DORMENTES ESPECIAIS DE AMV, COM 7,00M",
+            "VPE530S": "SUBST. DE VIGAS DE MÁQUINAS DE CHAVE",
+            "VPE540S": "SUBST. DOR. ESPECIAL, PONTE, PONTILHÃO, VIADUTO",
+            "VPE550S": "SUBST. DORMENTES BI-BLOCOS / DORMENTES MADEIRA",
+            "VPE560S": "SUBST. DORMENTES ESPECIAIS AMV, ENTRE 3,00M a 4,20M",
+            "VPE570S": "SUBST. DORMENTES ESPECIAIS AMV, ENTRE 4,40M a 5,40M",
+            "VPE580S": "SUBST.  MEIA CHAVE COMPLETA ( AGULHA + ENCOSTO+ACESSÓRIOS )",
+            "VPE590S": "SUBSTITUIÇÃO DE CONTRA-TRILHO",
+            "VPE600S": "SUBSTITUIÇÃO DE CRUZAMENTO",
+            "VPE610S": "SUBSTITUIÇÃO DE DORMENTES CONCRETO MONOBLOCO",
+            "VPE620S": "SUBSTITUIÇÃO DE DORMENTES 2,80M, EM PLATAFORMA CONFINADA",
+            "VPE630S": "SUBSTITUIÇÃO DE DORMENTES DE MADEIRA COM 2,80M",
+            "VPE640S": "SUBSTITUIÇÃO DE FIXAÇÃO RÍGIDA POR FIXAÇÃO ELÁSTICA",
+            "VPE650S": "SUBSTITUIÇÃO DE FIXAÇÃO RN",
+            "VPE660S": "SUBSTITUIÇÃO DE JUNTA ISOLADA COLADA (INCLUI DORM. SE NECESSÁRIO)",
+            "VPE670S": "SUBSTITUIÇÃO DE JUNTAS ISOLADAS",
+            "VPE680S": "SUBSTITUIÇÃO DE TRILHOS TR-57",
+            "VPE690S": "SUBSTITUIÇÃO DE TRILHOS TR-57 REEMPREGO",
+            "VPE700S": "TRABALHADOR DE VIA PERMANENTE",
+            "VPE710S": "SUBST.CRUZAMENTO REEMPREGO",
+            "VPE720S": "SOLDA TERCERIZADA",
+            "VPE730S": "SOLDA SUPERVIA",
+            "VPE740S": "DORMENTEDE CONCRETO POR DORMENTE DE MADEIRA",
+            "VPE750S": "LASTRO COLMATADO",
+            "VPE760S": "SUBST. JUNTA ENCAPSULADA",
+            "VPE770S": "DORMENTE DE MADEIRA 2,00 MTS",
+            "VPE780S": "SUBST. DE CONTRA TRILHO",
+            "VPE790S": "CARGA DORMENTE NOVOS",
+            "VPE800S": "DESCARGA DE DORMENTE NOVOS",
+            "VPE810S": "SUBST.DE DORMENTES ESPECIAIS DE AMV 7 MTS REEMPREGO",
+            "VPE820S": "SUBST.DE VIGA MÁQUINA DE CHAVE REEMPREGO",
+            "VPE830S": "SUBST.DOR.ESPECIAL PONTE PONTILHÃO VIADUTO REEMPREGO",
+            "VPE840S": "SUBST.DOR.ESPECIAL AMV 3,00 a 4,20 MTS REEMPREGO",
+            "VPE850S": "SUBST.DOR.ESPECIAL AMV 4,40 a 5,40 MTS REEMPREGO",
+            "VPE860S": "GRAMPO DE FIXAÇÃO",
+            "VPE880S": "ALIVIO DE TENSÃO",
+        }
+        const vpe_serviço = {
+            "ALÍVIO DE TENSÃO EM TRILHO LONGO SOLDADO": "VPE010S",
+            "APLICAÇÃO DE DORMENTES 2,80M REEMPREGO": "VPE020S",
+            "APLICAÇÃO DE PARAFUSO DE TALA": "VPE030S",
+            "APLICAÇÃO DE PARAFUSO DE TALA REEMPREGO": "VPE040S",
+            "APLICAÇÃO DE TIREFONDS NOVOS": "VPE050S",
+            "APLICAÇÃO DE TIREFONDS REEMPREGO": "VPE060S",
+            "APLICAÇÃO MECANIZADA DE MONOBLOCO": "VPE070S",
+            "BIZELAMENTO DE JUNTAS ISOLANTES": "VPE080S",
+            "CARGA DE DORMENTES INSERVÍVEIS": "VPE090S",
+            "CARGA DE TRILHOS INSERVÍVEIS": "VPE100S",
+            "COLOCAÇÃO E RETIRADA DE PLACAS DE RESTR. VELOCIDADE": "VPE110S",
+            "COMPLEMENTAÇÃO DE FIXAÇÃO TIREFOND": "VPE120S",
+            "CONFECÇÃO DE PARA LASTRO": "VPE130S",
+            "CONSERVAÇÃO DE JUNTAS COMUNS COM DESMONTAGEM": "VPE140S",
+            "CONSERVAÇÃO DE JUNTAS COMUNS SEM DESMONTAGEM": "VPE150S",
+            "CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE CONCRETO BI-BLOCO": "VPE160S",
+            "CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE CONCRETO MONOBLOCO": "VPE170S",
+            "CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE MADEIRA": "VPE180S",
+            "CONSOLIDAÇÃO DO AMV: PARAFUSOS, FIXAÇÕES, ETC.": "VPE190S",
+            "CORREÇÃO DE BITOLA": "VPE200S",
+            "CORTE DE TRILHOS": "VPE210S",
+            "CORTE DIRETO DE DORMENTES DE MADEIRA": "VPE220S",
+            "DESCARGA DE DORMENTES INSERVÍVEIS": "VPE230S",
+            "DESCARGA DE LASTRO": "VPE240S",
+            "DESCOBRIMENTO E RECOBRIMENTO DE PASSAGEM EM NIVEL": "VPE250S",
+            "DESGUARNEC. MANUAL LASTRO, ATÉ 20CM  FACE INF. DORM. BL 1,00M": "VPE260S",
+            "DESGUARNEC. MANUAL LASTRO, ATÉ 20CM  FACE INF. DORM. BL 1,60M": "VPE270S",
+            "DESGUARNEC. MANUAL LASTRO, ATÉ 20CM  FACE INF. DORM. BL 1,60M MIX": "VPE280S",
+            "DESGUARNEC. MECANIZADO LASTRO, MAIOR 20CM  FACE INF. DORM. BL 1,60M": "VPE290S",
+            "DESMONTAGEM E MONTAGEM DE VIA COM CONTRA-TRILHO SOBRE PONTES": "VPE300S",
+            "ENTALHE DE DORMENTES DE MADEIRA": "VPE310S",
+            "ESQUADRO DE CHAVE": "VPE320S",
+            "FURAÇÃO DE TRILHOS": "VPE330S",
+            "IMPLANTAÇÃO DE JUNTA ISOLADA COLADA": "VPE340S",
+            "IMPLANTAÇÃO DE JUNTA ISOLADA ENCAPSULADA": "VPE350S",
+            "INSTALAÇÃO DE JUNTAS COMUNS": "VPE360S",
+            "LOCAÇÃO DE RETRO ESCAVADEIRA": "VPE370S",
+            "MANUTENÇÃO CORRETIVA DE JUNTAS TJ-57(LUBR.,LIMP.TALAS E TR, ETC)": "VPE380S",
+            "MANUTENÇÃO LINHAS OFICINAS": "VPE390S",
+            "NIVELAMENTO / SOCARIA MANUAL DE JUNTAS": "VPE400S",
+            "NIVELAMENTO, ALINHAMENTO E SOCARIA MANUAL  LINHA": "VPE410S",
+            "NIVELAMENTO, ALINHAMENTO E SOCARIA MANUAL  AMV": "VPE420S",
+            "QUADRAMENTO E REESPAÇAMENTO DORMENTES / VIGAS": "VPE430S",
+            "REAPERTO DE CRUZAMENTO C/ CONTRA TRILHO": "VPE440S",
+            "REGULAGEM GERAL DE CHAVE MANUAL": "VPE450S",
+            "REGULARIZAÇÃO MANUAL DE LASTRO": "VPE460S",
+            "REGULARIZAÇÃO MANUAL DO LASTRO DE AMV": "VPE470S",
+            "RESTAURAÇÃO DE PASSAGEM EM NIVEL": "VPE480S",
+            "RETENSIONAMENTO": "VPE490S",
+            "RETIRADA DE DORMENTES DE MADEIRA": "VPE500S",
+            "RONDA DE LINHA": "VPE510S",
+            "SUBST. DE DORMENTES ESPECIAIS DE AMV, COM 7,00M": "VPE520S",
+            "SUBST. DE VIGAS DE MÁQUINAS DE CHAVE": "VPE530S",
+            "SUBST. DOR. ESPECIAL, PONTE, PONTILHÃO, VIADUTO": "VPE540S",
+            "SUBST. DORMENTES BI-BLOCOS / DORMENTES MADEIRA": "VPE550S",
+            "SUBST. DORMENTES ESPECIAIS AMV, ENTRE 3,00M a 4,20M": "VPE560S",
+            "SUBST. DORMENTES ESPECIAIS AMV, ENTRE 4,40M a 5,40M": "VPE570S",
+            "SUBST.  MEIA CHAVE COMPLETA ( AGULHA + ENCOSTO+ACESSÓRIOS )": "VPE580S",
+            "SUBSTITUIÇÃO DE CONTRA-TRILHO": "VPE590S",
+            "SUBSTITUIÇÃO DE CRUZAMENTO": "VPE600S",
+            "SUBSTITUIÇÃO DE DORMENTES CONCRETO MONOBLOCO": "VPE610S",
+            "SUBSTITUIÇÃO DE DORMENTES 2,80M, EM PLATAFORMA CONFINADA": "VPE620S",
+            "SUBSTITUIÇÃO DE DORMENTES DE MADEIRA COM 2,80M": "VPE630S",
+            "SUBSTITUIÇÃO DE FIXAÇÃO RÍGIDA POR FIXAÇÃO ELÁSTICA": "VPE640S",
+            "SUBSTITUIÇÃO DE FIXAÇÃO RN": "VPE650S",
+            "SUBSTITUIÇÃO DE JUNTA ISOLADA COLADA (INCLUI DORM. SE NECESSÁRIO)": "VPE660S",
+            "SUBSTITUIÇÃO DE JUNTAS ISOLADAS": "VPE670S",
+            "SUBSTITUIÇÃO DE TRILHOS TR-57": "VPE680S",
+            "SUBSTITUIÇÃO DE TRILHOS TR-57 REEMPREGO": "VPE690S",
+            "TRABALHADOR DE VIA PERMANENTE": "VPE700S",
+            "SUBST.CRUZAMENTO REEMPREGO": "VPE710S",
+            "SOLDA TERCERIZADA": "VPE720S",
+            "SOLDA SUPERVIA": "VPE730S",
+            "DORMENTEDECONCRETO POR DORMENTE DE MADEIRA": "VPE740S",
+            "LASTRO COLMATADO": "VPE750S",
+            "SUBST. JUNTA ENCAPSULADA": "VPE760S",
+            "DORMENTE DE MADEIRA 2,00 MTS": "VPE770S",
+            "SUBST. DE CONTRA TRILHO": "VPE780S",
+            "CARGA DORMENTE NOVOS": "VPE790S",
+            "DESCARGA DE DORMENTE NOVOS": "VPE800S",
+            "SUBST.DE DORMENTES ESPECIAIS DE AMV 7 MTS REEMPREGO": "VPE810S",
+            "SUBST.DE VIGA MÁQUINA DE CHAVE REEMPREGO": "VPE820S",
+            "SUBST.DOR.ESPECIAL PONTE PONTILHÃO VIADUTO REEMPREGO": "VPE830S",
+            "SUBST.DOR.ESPECIAL AMV 3,00 a 4,20 MTS REEMPREGO": "VPE840S",
+            "SUBST.DOR.ESPECIAL AMV 4,40 a 5,40 MTS REEMPREGO": "VPE850S",
+            "GRAMPO DE FIXAÇÃO": "VPE860S",
+            "ALIVIO DE TENSÃO": "VPE880S"
+        }
+    
 
 
         const submitBtn = document.getElementById("submitBtn");
         const stationInput = document.getElementById("stationInput");
         const result = document.getElementById("result");
+        const VPE = document.getElementById( 'vpe' );
 
         submitBtn.addEventListener("click", () => {
             const station = stationInput.value.trim().toUpperCase();
-
+            
             if (estacoes[station]!== undefined) {
                 result.textContent = `A estação ou ramal referida está no km: ${(estacoes[station])}`;
             }else if (kms[station]!== undefined){
                 result.textContent = `O km referido tem fica localizado no estação: ${(kms[station])} `;
-            }else{
+            }
+            else{
                 result.textContent = "Informação não encontrada";
             }
              
