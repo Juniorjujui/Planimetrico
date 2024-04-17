@@ -90,14 +90,12 @@
         <form action="">
         
             <legend>
-              
-                Ronda de linha
-               
+                RONDA DE LINHA
             </legend>
              <br>
 
         <fieldset>
-            <label for="nome">DATA:</label>
+            <label for="data">DATA:</label>
             <input type="date" maxlength="data" id="data" name="data"  required/> 
 
             <label for="tipo_endereço">RAMAL:</label>
@@ -116,24 +114,26 @@
             <br>
         <fieldset>
             <div class="inputBox">
-                <label for="nome_cco">NOME DO CCO:</label>
+                
             <div></div>
+            <div>
+                <label for="nome_cco">NOME DO CCO:</label>
                 <input type="text" minlength="3" id="nome_cco" name="nome_coo"required />
-            
+            </div>
                 <label for="Numero_segurança">NÚMERO DA O.S (RONDA S.G):</label>
                 <input type="number" maxlength="5" minlength="5" id="Numero_segurança" name="Numero_segurança" required laceholder="00000"/> <br>                        
             </div>
             <br> <br>
             <div class="inputBox">
-                <label for="nome">NOME:</label>
+                <label for="nome">1º RODANTE</label>:</label>
                 <input type="text" minlength="3" id="nome" name="nome"required />
             
                 <label for="matrícula">MATRÍCULA:</label>
-                <input type="text" maxlength="6" minlength="6" id="cpf" name="cpf" required laceholder="000000"/> <br>
+                <input type="text" maxlength="6" minlength="5" id="matricula" name="matricula" required laceholder="00000"/> <br>
             </div>
 
             <div class="inputBox">
-            <label for="nome">NOME:</label>
+            <label for="nome">2º RODANTE:</label>
             <input type="text" minlength="3" id="nome" name="nome"required /> 
 
             <label for="matrícula">MATRÍCULA:</label>
@@ -141,7 +141,7 @@
             </div>
 
             <div class="inputBox">
-            <label for="nome">NOME:</label>
+            <label for="nome">3º RODANTE:</label>
             <input type="text" minlength="3" id="nome" name="nome"required /> 
 
             <label for="matrícula">MATRÍCULA:</label>
@@ -149,37 +149,47 @@
             </div>
         </fieldset>
 
+        <fieldset>
+            <div class="inputBox">
+                <div></div><br>
+                    <div><legend>1º TRECHO</legend></div> <br>
+                <div>
+                    <label for="trecho">TRECHO: </label>
+                    <input type="text" minlength="3" id="trecho" name="trecho"required/>
 
+                    <label for="linha">LINHA: </label>
+                    <input type="NUMBER" minlength="4" id="linha" name="linha" required laceholder="00000" required/>
+                </div>
+                <div>
+                    
+                    <label for="hora saida">HORA SAÍDA:</label>
+                    <input type="datetime-local" maxlength="hora saida" id="hora saida" name="hora saida"  required/> 
+              
+                    <label for="hora entrada">HORA ENTREDA:</label>
+                    <input type="datetime-local" maxlength="hora entrada" id="hora entrada" name="hora entrada"  required/>
+                </div><br>
+
+                <div><legend>2º TRECHO</legend></div> <br>
+                <div>
+                    <label for="trecho">TRECHO: </label>
+                    <input type="text" minlength="3" id="trecho" name="trecho"required/>
+
+                    <label for="linha">LINHA: </label>
+                    <input type="NUMBER" minlength="4" id="linha" name="linha" required laceholder="00000" required/>
+                </div>
+                <div>
+                    
+                    <label for="hora saida">HORA SAÍDA:</label>
+                    <input type="datetime-local" maxlength="hora saida" id="hora saida" name="hora saida"  required/> 
+              
+                    <label for="hora entrada">HORA ENTREDA:</label>
+                    <input type="datetime-local" maxlength="hora entrada" id="hora entrada" name="hora entrada"  required/>
+                </div>
+        </fieldset>
   
         <fieldset>
-            <label for="tipo_numero" >VPE</label>
-            <select name="tipo_numero" >
-                <option value="">Selecione</option>
-                <option value="VPE020S">APLICAÇÃO DE DORMENTES 2,80M REEMPREGO</option>
-                <option value="VPE030S">APLICAÇÃO DE PARAFUSO DE TALA</option>
-                <option value="VPE040S">APLICAÇÃO DE PARAFUSO DE TALA REEMPREGO</option>
-                <option value="VPE050S"> APLICAÇÃO DE TIREFONDS NOVOS</option>
-                <option value="VPE060S"> APLICAÇÃO DE TIREFONDS REEMPREGO</option>
-                <option value="VPE080S"> BIZELAMENTO DE JUNTAS ISOLANTES</option>
-                <option value="VPE090S"> CARGA DE DORMENTES INSERVÍVEIS</option>
-                <option value="VPE110S"> COLOCAÇÃO E RETIRADA DE PLACAS DE RESTR. VELOCIDADE </option>
-                <option value="VPE040S">CONSERVAÇÃO DE JUNTAS COMUNS COM DESMONTAGEM</option>
-                <option value="VPE150S"> CONSERVAÇÃO DE JUNTAS COMUNS SEM DESMONTAGEM</option>
-                <option value="VPE160S"> CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE CONCRETO BI-BLOCO</option>
-                <option value="VPE170S"> CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE CONCRETO MONOBLOCO</option>
-                <option value="VPE180S">CONSOLIDAÇÃO DE FIXAÇÃO EM DORMENTES DE MADEIRA</option>
-                <option value="VPE200S">CORREÇÃO DE BITOLA</option>
-                <option value="VPE210S">CORTE DE TRILHOS</option>
-                <option value="VPE330S">FURAÇÃO DE TRILHOS </option>
-                <option value="VPE400S"> NIVELAMENTO / SOCARIA MANUAL DE JUNTAS</option>
-                <option value="VPE410S ">NIVELAMENTO, ALINHAMENTO E SOCARIA MANUAL LINHA</option>
-                <option value="VPE090S"> CARGA DE DORMENTES INSERVÍVEIS</option>
-                <option value="VPE440S"> REAPERTO DE CRUZAMENTO C/ CONTRATRILHO </option>
-                <option value="VPE490S ">RETENSIONAMENTO</option>
-                <option value=VPE630S"> SUBSTITUIÇÃO DE DORMENTES DE MADEIRA COM 2,80M </option>
-                <option value="VPE670S"> SUBSTITUIÇÃO DE JUNTAS ISOLADAS</option>
-                <option value="VPE680S"> SUBSTITUIÇÃO DE TRILHOS TR-57</option>
-                <option value="VPE860S"> GRAMPO DE FIXAÇÃO</option>
+  
+            
         </fieldset>
             <legend>Endereço</legend>
 
@@ -192,11 +202,12 @@
    
             <button type="submit" id="button">Enviar sua Mensagem </button>
 
-   =
+   
     </form>
 
 
     <script>
+
         const kms = {
             "21+874": "DEODORO",
             "20+489": "MARECHAL HERMES",
@@ -407,7 +418,7 @@
             "PARADA BANANAL": "14+867",
             "GUAPIMIRIM": "16+726"          
         };
-        const vpe_codes = {
+        const checkbok = document.getElementById = {
             "VPE010S": "ALÍVIO DE TENSÃO EM TRILHO LONGO SOLDADO",
             "VPE020S": "APLICAÇÃO DE DORMENTES 2,80M REEMPREGO",
             "VPE030S": "APLICAÇÃO DE PARAFUSO DE TALA",
@@ -597,7 +608,7 @@
             const station = stationInput.value.trim().toUpperCase();
             
             if (estacoes[station]!== undefined) {
-                result.textContent = `A estação ou ramal referida está no km: ${(estacoes[station])}`;
+                result.textContent = `A estação ou ramal referida está no km: ${(estacoes[station])} in stationInput`;
             }else if (kms[station]!== undefined){
                 result.textContent = `O km referido tem fica localizado no estação: ${(kms[station])} `;
             }else{
